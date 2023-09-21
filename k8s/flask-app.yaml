@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app-deployment
+  template:
+    metadata:
+      labels:
+        app: flask-app-deployment
+    spec:
+      containers:
+      - name: flask-app-deployment
+        image: bdor528/ltl-url:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+
+        env:
+        - name: SQL_USR_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-username
+
+        - name: SQL_USR_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+---
+
+
+# MINIKUBE
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  selector:
+    app: flask-app-deployment
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 5000
+      port: 5000
+
+# ---
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: flask-ingress
+#   annotations:
+#     nginx.ingress.kubernetes.io/backend-protocol: HTTP
+#     kubernetes.io/ingress.class: nginx
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+# spec:
+#   rules:
+#   - host: flaskapp.com
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: /
+#         backend:
+#           service: 
+#             name: flask-app-service
+#             port: 
+#               number: 5000
