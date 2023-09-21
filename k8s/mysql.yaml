@@ -60,6 +60,6 @@ data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS ltlurldb;
     USE ltlurldb;
-    CREATE TABLE links (id INT, url VARCHAR(256), uuid VARCHAR(6));
+    CREATE TABLE links (id INT NOT NULL AUTO_INCREMENT, url VARCHAR(256), uuid VARCHAR(6));
     INSERT INTO links VALUES (1, 'https://www.google.com/', 'abcdef');
     INSERT INTO links VALUES (2, 'https://www.facebook.com/', 'qwerty');
