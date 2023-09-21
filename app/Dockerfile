@@ -6,7 +6,10 @@ WORKDIR /app
 COPY . .
 # Install all the dependencies required to run the Flask application
 RUN pip3 install -r requirements.txt
+# Add print statements to pod logs
+ENV PYTHONUNBUFFERED=1
 # Expose the Docker container for the application to run on port 5000
 EXPOSE 5000
 # The command required to run the Dockerized application
 CMD ["python", "app.py"]
+
