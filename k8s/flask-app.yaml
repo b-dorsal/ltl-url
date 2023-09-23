@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: flask-app-deployment
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: flask-app-deployment
@@ -36,8 +36,6 @@ spec:
               key: mysql-root-password
 ---
 
-
-# MINIKUBE
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,11 +43,10 @@ metadata:
 spec:
   selector:
     app: flask-app-deployment
-  type: ClusterIP
+  type: NodePort
   ports:
-    - name: http
+    - port: 5000
       targetPort: 5000
-      port: 5000
 
 # ---
 
@@ -73,3 +70,25 @@ spec:
 #             name: flask-app-service
 #             port: 
 #               number: 5000
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mysql-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "ingress-ltlurl"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: "/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: flask-app-service
+            port:
+              number: 5000
+

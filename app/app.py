@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template, url_for
 import mysql.connector
 import random
 import string
@@ -26,16 +26,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    
-    content = """
-        <h1>ltl-url</h1>
-        <form action="/create" method="post">
-            <input type="text" name="url">
-            <input type="submit">
-        </form>
-    """
-    
-    return content
+    return render_template("home.html")
 
 
 @app.route("/<uuid>")
@@ -47,7 +38,7 @@ def reroute(uuid):
     url = result[0]
     cur.close()
 
-    return f'<html><head><title>ltlurl</title></head><body><h1>{url}</h1><p>Redirecting...</p><script>setTimeout(function(){{window.location.replace("{url}")}}, 2000);</script></body>'
+    return render_template("url.html", url=url)
 
 
 @app.route("/create", methods = ["POST"])
@@ -62,7 +53,7 @@ def create():
     conn.commit()
     cur.close()
 
-    return f'<h1>{uuid}</h1>'
+    return render_template("create.html", uuid=uuid)
 
 
 
