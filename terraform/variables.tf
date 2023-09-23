@@ -53,3 +53,8 @@ variable "machine_type" {
     default         = "n1-standard-4"
     description     = "The type of VM to use for nodes"
 }
+
+variable "lb_ip_name" {
+    type            = string
+    description     = "Load Balancer Static External IP Name"
+}

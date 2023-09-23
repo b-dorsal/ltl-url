@@ -34,6 +34,7 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: mysql-root-password
+              
 ---
 
 apiVersion: v1
@@ -47,29 +48,6 @@ spec:
   ports:
     - port: 5000
       targetPort: 5000
-
-# ---
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: flask-ingress
-#   annotations:
-#     nginx.ingress.kubernetes.io/backend-protocol: HTTP
-#     kubernetes.io/ingress.class: nginx
-#     nginx.ingress.kubernetes.io/rewrite-target: /
-# spec:
-#   rules:
-#   - host: flaskapp.com
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: /
-#         backend:
-#           service: 
-#             name: flask-app-service
-#             port: 
-#               number: 5000
 
 ---
 

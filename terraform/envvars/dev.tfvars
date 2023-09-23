@@ -20,8 +20,10 @@ kubernetes_version  = "1.27"
 
 cluster_zone        = "us-central1-b"
 
-cluster_name        = "flask-app-cluster" # "ltlurl-cluster"
+cluster_name        = "ltlurl-cluster" # "ltlurl-cluster"
 
 init_node_count     = 2
 
 machine_type        = "n1-standard-4"
+
+lb_ip_name          = "ingress-ltlurl"

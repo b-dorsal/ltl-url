@@ -32,7 +32,7 @@ def homepage():
 @app.route("/<uuid>")
 def reroute(uuid):
     cur = conn.cursor()
-
+    uuid = uuid.upper()
     cur.execute("""SELECT url FROM `ltlurldb`.`links` WHERE `uuid` = %s""", [uuid])
     result = cur.fetchone()
     url = result[0]
@@ -46,7 +46,7 @@ def create():
     
     url = request.form['url']
     uuid = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(6))
-    
+    uuid = uuid.upper()
     cur = conn.cursor()
 
     cur.execute("""INSERT INTO `ltlurldb`.`links` (url, uuid) VALUES (%s, %s)""", [url,uuid])
