@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>ltlurl</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <h1>ltlurl</h1>
+        <h2>{{url}}</h2>
+        <p>Redirecting...</p>
+        <p>if you arent redirected in 2 seconds, click here...</p>
+        <a href="{{url}}">{{url}}</a>
+        <script>setTimeout(function(){ window.location.href = "{{url}}" }, 2000);</script>
+    </body>
+</html>
