@@ -32,6 +32,6 @@ resource "google_container_cluster" "default" {
 
 #  Ingress Static IP
 resource "google_compute_global_address" "default" {
-  name = "ingress-ltlurl"
-  project = google_project.gke_project.project_id
+  name      = var.lb_ip_name
+  project   = google_project.gke_project.project_id
 }
