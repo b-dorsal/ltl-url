@@ -41,3 +41,4 @@ Wait for an IP on ingress, and visit in a browser
 kubectl get flask-ingress
 ```
 
+
