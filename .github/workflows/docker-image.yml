@@ -1,5 +1,11 @@
 name: Docker Image CI
 
+env:
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  REPO_NAME: ${{secrets.REPO_NAME}}
+
+
 on:
   # push:
   #   branches: [ "main" ]
@@ -15,6 +21,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -t bdor528/ltl-url ./app
+      run: docker build -t $DOCKER_USER/ltl-url ./app
     - name: Deploy Docker Image
-      run: docker push bdor528/ltl-url
+      run: docker push $DOCKER_USER/$REPO_NAME
