@@ -23,4 +23,4 @@ jobs:
     - name: Build the Docker image
       run: docker build -t $DOCKER_USER/ltl-url ./app
     - name: Deploy Docker Image
-      run: docker push $DOCKER_USER/$REPO_NAME
+      run: docker push $DOCKER_USER/ltl-url
