@@ -40,3 +40,6 @@ Wait for an IP on ingress, and visit in a browser
 ```bash
 kubectl get flask-ingress
 ```
+
+
+
