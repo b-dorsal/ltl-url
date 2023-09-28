@@ -21,6 +21,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -t $DOCKER_USER/ltl-url ./app
+      run: docker build -t $DOCKER_USER/$REPO_NAME ./app
     - name: Deploy Docker Image
-      run: docker push $DOCKER_USER/ltl-url
+      run: docker push $DOCKER_USER/$REPO_NAME
